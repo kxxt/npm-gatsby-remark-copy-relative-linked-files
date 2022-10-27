@@ -19,6 +19,8 @@ export type PluginOptions = {
   ignoreFileExtensions?: string[]
   /** Callback function for processing the file name independently. */
   filename?: (params: FilenameParams) => string
+  /** Prefix */
+  prefix?: string
 }
 
 /** Options of GatsbyJS remark. */
@@ -72,7 +74,11 @@ export const plugin = (
     markdownAST,
     getNode,
   }: GatsbyRemarkOptions,
-  { ignoreFileExtensions = ['.md', '.mdx'], filename = undefined }: PluginOptions
+  {
+    ignoreFileExtensions = ['.md', '.mdx'],
+    filename = undefined,
+    prefix = 'public',
+  }: PluginOptions
 ) => {
   const markdownDirectory = getNode(markdownNode.parent).dir
 
@@ -101,7 +107,7 @@ export const plugin = (
       )
     }
 
-    const publicPath = path.join(process.cwd(), 'public', updatedPath)
+    const publicPath = path.join(process.cwd(), prefix, updatedPath)
 
     if (!fsExtra.existsSync(publicPath)) {
       fsExtra.copy(linkPath, publicPath, (err) => {
