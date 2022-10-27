@@ -72,7 +72,7 @@ export const plugin = (
     markdownAST,
     getNode,
   }: GatsbyRemarkOptions,
-  { ignoreFileExtensions = ['.md'], filename = undefined }: PluginOptions
+  { ignoreFileExtensions = ['.md', '.mdx'], filename = undefined }: PluginOptions
 ) => {
   const markdownDirectory = getNode(markdownNode.parent).dir
 
