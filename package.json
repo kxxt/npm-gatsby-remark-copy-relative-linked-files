@@ -33,7 +33,7 @@
     "watch": "tsc -w"
   },
   "peerDependencies": {
-    "gatsby": "^4.0.0"
+    "gatsby": "^4 || ^5"
   },
   "dependencies": {
     "fs-extra": "^10.0.0",
