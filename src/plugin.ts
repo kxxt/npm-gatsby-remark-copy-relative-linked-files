@@ -21,6 +21,8 @@ export type PluginOptions = {
   filename?: (params: FilenameParams) => string
   /** Prefix */
   prefix?: string
+  /** Link Prefix */
+  hrefPrefix?: string
 }
 
 /** Options of GatsbyJS remark. */
@@ -78,6 +80,7 @@ export const plugin = (
     ignoreFileExtensions = ['.md', '.mdx'],
     filename = undefined,
     prefix = 'public',
+    hrefPrefix = '',
   }: PluginOptions
 ) => {
   const markdownDirectory = getNode(markdownNode.parent).dir
@@ -117,7 +120,7 @@ export const plugin = (
       })
     }
 
-    return path.join(linkPrefix || '/', updatedPath)
+    return path.join(linkPrefix || '/', hrefPrefix, updatedPath)
   }
 
   const copyIfRelativeAndNotIgnored = (path: string) => {
